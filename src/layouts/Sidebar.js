@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
     return (
@@ -16,7 +17,7 @@ export default function Sidebar() {
 
                 <div 
                     className="offcanvas offcanvas-start" 
-                    tabindex="-1" 
+                    tabIndex="-1" 
                     id="offcanvasExample" 
                     aria-labelledby="offcanvasExampleLabel"
                 >
@@ -27,11 +28,11 @@ export default function Sidebar() {
 
                     <div>
                         <div className="row sideBarButton">
-                            <button className="btn btn-outline-success btnSidebar" type="button">Inicio</button>   
+                            <Link className="btn btn-outline-success btnSidebar" to={'/'}>Inicio</Link>   
                         </div>
 
                         <div className="row sideBarButton">
-                            <button className="btn btn-outline-primary btnSidebar sidebarColor" type="button">Inicar sesión</button>
+                            <Link className="btn btn-outline-primary btnSidebar sidebarColor" to={'/'}>Inicar sesión</Link>
                         </div>
                     </div>
                 </div>
