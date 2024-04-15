@@ -7,17 +7,27 @@ import "./styles/style.css"
 import Navbar from "./layouts/Navbar";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import logoGobierno from "./img/logoGobierno.png";
+
 import Home from './pages/Home';
 import ConsultaEmpleados from './consultaEmpleados/ConsultaEmpleados';
 import ConsultaUnidad from './consultaUnidad/ConsultaUnidad';
-import Cumpleaneros from './cumpleañeros/Cumpleaneros';
+import Cumpleaneros from './cumpleaneros/Cumpleaneros';
+import Favicon from 'react-favicon';
+import { useEffect } from 'react';
 
 function App() {
+
+  useEffect(() => {
+    document.title = "Consulta Telefónica MH"
+  }, []);
+
   return (
     <div className="App">
+      <Favicon url={logoGobierno} />
+
       <Router>
-        
-        <Navbar />  
+        <Navbar />
         
         <Routes>
           <Route path='/' element={<Home />} />
