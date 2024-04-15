@@ -1,0 +1,47 @@
+:root{
+    --gobiernoColor: #303845;
+}
+
+.sidebar {
+    padding: 8px;
+    align-items: center;
+}
+
+.sideBarButton {
+    padding: 10px;
+    display: block;
+}
+
+.sidebarColor {
+    color: var(--gobiernoColor);
+    border-color: #303845;
+}
+.sidebarColor:hover {
+    background-color: var(--gobiernoColor);
+    border-color: gray;
+}
+
+.navActiveColor {
+    background-color: var(--gobiernoColor) !important;
+    border-color: gray;
+}
+
+.navTextColor {
+    color: var(--gobiernoColor);
+}
+.navTextColor:hover{
+    color: gray;
+}
+
+.navTextSmall {
+    font-size: 13px;
+}
+
+.btnSidebar {
+    width: 200px;
+}
+
+.linesButton {
+    width: 1.3em;
+    height: 1.3em;
+}
