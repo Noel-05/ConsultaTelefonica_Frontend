@@ -1,7 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Sidebar() {
+    let navigate = useNavigate();
+    
+    const onClickInicio = (e) => {
+        navigate("/");
+    }
+
+    const onClickLogin = (e) => {
+        navigate("/");
+    }
+
     return (
         <nav className="navbar bg-body-tertiary">
             <div className="container-fluid" >
@@ -23,16 +33,32 @@ export default function Sidebar() {
                 >
                     <div className="offcanvas-header">
                         <h5 className="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <button type="button" 
+                            className="btn-close" 
+                            data-bs-dismiss="offcanvas" 
+                            aria-label="Close"
+                        ></button>
                     </div>
 
                     <div>
                         <div className="row sideBarButton">
-                            <Link className="btn btn-outline-success btnSidebar" to={'/'}>Inicio</Link>   
+                            <button type="button" 
+                                className="btn btn-outline-success btnSidebar" 
+                                data-bs-dismiss="offcanvas" 
+                                onClick={(e) => onClickInicio(e)}
+                            >
+                                Inicio
+                            </button>   
                         </div>
 
                         <div className="row sideBarButton">
-                            <Link className="btn btn-outline-primary btnSidebar sidebarColor" to={'/'}>Inicar sesión</Link>
+                            <button type="button" 
+                                className="btn btn-outline-primary btnSidebar sidebarColor" 
+                                data-bs-dismiss="offcanvas" 
+                                onClick={(e) => onClickLogin(e)}
+                            >
+                                Inicar sesión
+                            </button>
                         </div>
                     </div>
                 </div>

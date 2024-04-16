@@ -7,7 +7,7 @@ import "./styles/style.css"
 import Navbar from "./layouts/Navbar";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import logoGobierno from "./img/logoGobierno.png";
+import logoGobierno from "./img/logoGobierno2.jpg";
 
 import Home from './pages/Home';
 import ConsultaEmpleados from './consultaEmpleados/ConsultaEmpleados';
