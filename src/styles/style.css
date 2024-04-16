@@ -14,7 +14,7 @@
 
 .sidebarColor {
     color: var(--gobiernoColor);
-    border-color: #303845;
+    border-color: var(--gobiernoColor);
 }
 .sidebarColor:hover {
     background-color: var(--gobiernoColor);
@@ -44,4 +44,22 @@
 .linesButton {
     width: 1.3em;
     height: 1.3em;
+}
+
+.inputSearchLarge {
+    width: 50%;
+    padding-left: 5%;
+}
+
+.inputLeftColor {
+    background-color: lightgray;
+}
+
+.btnTableHeader {
+    display: flex;
+    justify-content: center;
+}
+.btnTable:hover {
+    background-color: var(--gobiernoColor) !important;
+    border-color: gray;
 }

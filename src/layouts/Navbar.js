@@ -12,7 +12,7 @@ export default function Navbar() {
                         <Sidebar />
                     </div>
 
-                    <div className="col-11 sidebar">
+                    <div className="col-11 sidebar mb-3">
                         <Tabs />
                     </div>
                     
