@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Cumpleanos from '../img/cumpleanos.png';
 import ImagenNoDisponible from '../img/imagenNoDisponible.png';
+import axios from 'axios';
 
 export default function TablaEmpleados(props) {
+
+    const [telefonosEmpleado, setTelefonosEmpleado] = useState([]);
+    
+    const [filaSeleccionada, setFilaSeleccionada] = useState();
 
     let today = new Date();
     today = today.getDate().toString().padStart(2, '0') + "/" + (today.getMonth() + 1).toString().padStart(2, '0');
@@ -13,6 +18,18 @@ export default function TablaEmpleados(props) {
         
         return empleado;
     });
+
+    const getTelefonosEmpleado = async(empleadoId) => {
+        setFilaSeleccionada(empleadoId);
+        const getTelefonosEmpleado = await axios.get(
+            `${process.env.REACT_APP_API_URL}/empleadoTelefono/empleado/${empleadoId}`
+        );
+        setTelefonosEmpleado(getTelefonosEmpleado.data);
+    };
+
+    const colorFilaTabla = (empleadoId) => {
+        return filaSeleccionada === empleadoId ? 'align-middle table-warning' : 'align-middle';
+    }
 
     return (
         <div className='container-fluid text-start px-4'>
@@ -43,7 +60,11 @@ export default function TablaEmpleados(props) {
                                     <tbody>
                                         {
                                             props.empleadosList.map((empleado) => (
-                                                <tr key={empleado.id} className='align-middle'>
+                                                <tr 
+                                                    key={empleado.id} 
+                                                    className={colorFilaTabla(empleado.id)}
+                                                    onClick={() => getTelefonosEmpleado(empleado.id)}
+                                                >
                                                     <td className='text-center'>
                                                         {
                                                             empleado.if_birthday === 'SI' ?
@@ -95,10 +116,14 @@ export default function TablaEmpleados(props) {
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td>7485 9632</td>
-                                            <td>Celular Oficina</td>
-                                        </tr>
+                                        {
+                                            telefonosEmpleado.map((telefono) => (
+                                                <tr key={telefono.id}>
+                                                    <td>{telefono.phone_number}</td>
+                                                    <td>{telefono.tipo_telefono.name}</td>
+                                                </tr>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
