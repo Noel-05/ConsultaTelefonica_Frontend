@@ -63,3 +63,11 @@
     background-color: var(--gobiernoColor) !important;
     border-color: gray;
 }
+
+.tableFont {
+    font-size: 13.5px;
+}
+
+.imgCumple {
+    width: 100px;
+}

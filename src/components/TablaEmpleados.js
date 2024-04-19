@@ -1,6 +1,19 @@
 import React from 'react'
+import Cumpleanos from '../img/cumpleanos.png';
+import ImagenNoDisponible from '../img/imagenNoDisponible.png';
 
 export default function TablaEmpleados(props) {
+
+    let today = new Date();
+    today = today.getDate().toString().padStart(2, '0') + "/" + (today.getMonth() + 1).toString().padStart(2, '0');
+
+    props.empleadosList.map((empleado) => {
+        empleado.if_jefe = empleado.rol_code === 'D' || empleado.rol_code === 'J' ? 'SI' : 'NO';
+        empleado.if_birthday = empleado.birth_date.substring(0, empleado.birth_date.length - 5) === today ? 'SI' : 'NO';
+        
+        return empleado;
+    });
+
     return (
         <div className='container-fluid text-start px-4'>
             <div className='row'>
@@ -14,7 +27,7 @@ export default function TablaEmpleados(props) {
                             </div>
 
                             <div className="card-body">
-                                <table className="table table-striped table-hover table-sm">
+                                <table className="table table-hover table-sm tableFont">
                                     <thead>
                                         <tr>
                                             <th scope="col" className='text-center'>Cumpleañero del día</th>
@@ -23,21 +36,34 @@ export default function TablaEmpleados(props) {
                                             <th scope="col">Dependencia</th>
                                             <th scope="col">Unidad</th>
                                             <th scope="col">Jefe</th>
-                                            <th scope="col">Foto</th>
+                                            <th scope="col" className='text-center'>Foto</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         {
-                                            props.empleadosList.map((empleado, index) => (
-                                                <tr>
-                                                    <th className='text-center'>{empleado.birth_date}</th>
+                                            props.empleadosList.map((empleado) => (
+                                                <tr key={empleado.id} className='align-middle'>
+                                                    <td className='text-center'>
+                                                        {
+                                                            empleado.if_birthday === 'SI' ?
+                                                                <img src={Cumpleanos} 
+                                                                    alt='Cumpleaños' 
+                                                                    className='imgCumple'/>
+                                                            : 
+                                                                ''
+                                                        }
+                                                    </td>
                                                     <td>{empleado.first_name} {empleado.last_name}</td>
-                                                    <td>{empleado.puesto.name}</td>
-                                                    <td>{empleado.puesto.unidad.dependencia.name}</td>
-                                                    <td>{empleado.puesto.unidad.name}</td>
-                                                    <td className='text-center'>{empleado.puesto.rol.name}</td>
-                                                    <td></td>
+                                                    <td>{empleado.puesto_name}</td>
+                                                    <td>{empleado.dependencia_name}</td>
+                                                    <td>{empleado.unidad_name}</td>
+                                                    <td>{empleado.if_jefe}</td>
+                                                    <td>
+                                                        <img src={ImagenNoDisponible} 
+                                                            alt='Foto'    
+                                                            className='imgCumple'/>
+                                                    </td>
                                                 </tr>
                                             ))
                                         }
@@ -60,7 +86,7 @@ export default function TablaEmpleados(props) {
                             </div>
 
                             <div className="card-body">
-                                <table className="table table-striped table-hover table-sm">
+                                <table className="table table-striped table-hover table-sm tableFont">
                                     <thead>
                                         <tr>
                                             <th scope="col">Teléfono</th>
