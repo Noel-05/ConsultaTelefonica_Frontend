@@ -120,7 +120,7 @@ export default function TablaEmpleados(props) {
                                             telefonosEmpleado.map((telefono) => (
                                                 <tr key={telefono.id}>
                                                     <td>{telefono.phone_number}</td>
-                                                    <td>{telefono.tipo_telefono.name}</td>
+                                                    <td>{telefono.tipo_telefono_name}</td>
                                                 </tr>
                                             ))
                                         }
