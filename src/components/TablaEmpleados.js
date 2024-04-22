@@ -2,35 +2,43 @@ import React, { useState } from 'react'
 import Cumpleanos from '../img/cumpleanos.png';
 import ImagenNoDisponible from '../img/imagenNoDisponible.png';
 import axios from 'axios';
+import TablaTelefonos from './TablaTelefonos';
 
-export default function TablaEmpleados(props) {
+export default function TablaEmpleados({employeeList, setEmployeeList}) {
 
-    const [telefonosEmpleado, setTelefonosEmpleado] = useState([]);
+    const [employeePhones, setEmployeePhones] = useState([]);
     
-    const [filaSeleccionada, setFilaSeleccionada] = useState();
+    const [selectedRow, setSelectedRow] = useState();
 
     let today = new Date();
     today = today.getDate().toString().padStart(2, '0') + "/" + (today.getMonth() + 1).toString().padStart(2, '0');
 
-    props.empleadosList.map((empleado) => {
-        empleado.if_jefe = empleado.rol_code === 'D' || empleado.rol_code === 'J' ? 'SI' : 'NO';
-        empleado.if_birthday = empleado.birth_date.substring(0, empleado.birth_date.length - 5) === today ? 'SI' : 'NO';
+    employeeList.map((employee) => {
+        employee.if_jefe = employee.rol_code === 'D' || employee.rol_code === 'J' ? 'SI' : 'NO';
+        employee.if_birthday = employee.birth_date.substring(0, employee.birth_date.length - 5) === today ? 'SI' : 'NO';
         
-        return empleado;
+        return employee;
     });
 
-    const getTelefonosEmpleado = async(empleadoId) => {
-        setFilaSeleccionada(empleadoId);
-        const getTelefonosEmpleado = await axios.get(
-            `${process.env.REACT_APP_API_URL}/empleadoTelefono/empleado/${empleadoId}`
+    const getEmployeePhones = async(employeeId) => {
+        setSelectedRow(employeeId);
+        const getEmployeePhones = await axios.get(
+            `${process.env.REACT_APP_API_URL}/empleadoTelefono/empleado/${employeeId}`
         );
-        setTelefonosEmpleado(getTelefonosEmpleado.data);
+        setEmployeePhones(getEmployeePhones.data);
     };
 
-    const colorFilaTabla = (empleadoId) => {
-        return filaSeleccionada === empleadoId ? 'align-middle table-warning' : 'align-middle';
-    }
+    const rowTableColor = (employeeId) => {
+        return selectedRow === employeeId ? 'align-middle table-warning' : 'align-middle';
+    };
 
+    const getEmployeesWithPhones = async() => {
+        const getEmployeesWithPhones = await axios.get(
+            `${process.env.REACT_APP_API_URL}/empleado/telefonos`
+        );
+        setEmployeeList(getEmployeesWithPhones.data);
+    };
+    
     return (
         <div className='container-fluid text-start px-4'>
             <div className='row'>
@@ -40,7 +48,13 @@ export default function TablaEmpleados(props) {
                         
                         <div className="card border-gray">
                             <div className="card-header btnTableHeader">
-                                <button type="button" className="btn btn-outline-dark btnTable">Empleados con teléfono</button>
+                                <button 
+                                    type="button" 
+                                    className="btn btn-outline-dark btnTable"
+                                    onClick={getEmployeesWithPhones}
+                                >
+                                    Empleados con teléfono
+                                </button>
                             </div>
 
                             <div className="card-body">
@@ -59,15 +73,15 @@ export default function TablaEmpleados(props) {
 
                                     <tbody>
                                         {
-                                            props.empleadosList.map((empleado) => (
+                                            employeeList.map((employee) => (
                                                 <tr 
-                                                    key={empleado.id} 
-                                                    className={colorFilaTabla(empleado.id)}
-                                                    onClick={() => getTelefonosEmpleado(empleado.id)}
+                                                    key={employee.id} 
+                                                    className={rowTableColor(employee.id)}
+                                                    onClick={() => getEmployeePhones(employee.id)}
                                                 >
                                                     <td className='text-center'>
                                                         {
-                                                            empleado.if_birthday === 'SI' ?
+                                                            employee.if_birthday === 'SI' ?
                                                                 <img src={Cumpleanos} 
                                                                     alt='Cumpleaños' 
                                                                     className='imgCumple'/>
@@ -75,11 +89,11 @@ export default function TablaEmpleados(props) {
                                                                 ''
                                                         }
                                                     </td>
-                                                    <td>{empleado.first_name} {empleado.last_name}</td>
-                                                    <td>{empleado.puesto_name}</td>
-                                                    <td>{empleado.dependencia_name}</td>
-                                                    <td>{empleado.unidad_name}</td>
-                                                    <td>{empleado.if_jefe}</td>
+                                                    <td>{employee.first_name} {employee.last_name}</td>
+                                                    <td>{employee.puesto_name}</td>
+                                                    <td>{employee.dependencia_name}</td>
+                                                    <td>{employee.unidad_name}</td>
+                                                    <td>{employee.if_jefe}</td>
                                                     <td>
                                                         <img src={ImagenNoDisponible} 
                                                             alt='Foto'    
@@ -97,41 +111,7 @@ export default function TablaEmpleados(props) {
                     </div>
                 </div>
 
-
-                <div className='col-3'>
-                    <div className="container mt-4">
-                        
-                        <div className="card border-gray">
-                            <div className="card-header">
-                                <span>Teléfonos del empleado</span>
-                            </div>
-
-                            <div className="card-body">
-                                <table className="table table-striped table-hover table-sm tableFont">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Teléfono</th>
-                                            <th scope="col">Tipo de Teléfono</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {
-                                            telefonosEmpleado.map((telefono) => (
-                                                <tr key={telefono.id}>
-                                                    <td>{telefono.phone_number}</td>
-                                                    <td>{telefono.tipo_telefono_name}</td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
+                <TablaTelefonos employeePhones={employeePhones} />
 
             </div>
         </div>

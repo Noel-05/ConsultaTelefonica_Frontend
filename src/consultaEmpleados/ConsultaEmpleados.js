@@ -19,9 +19,14 @@ export default function ConsultaEmpleados() {
 
   const searchEmployees = async() => {
     const searchEmpleado = await axios.get(
-      `${process.env.REACT_APP_API_URL}/empleado?firstname=${employee.firstname}&lastname=${employee.lastname}`
+      `${process.env.REACT_APP_API_URL}/empleado?firstname=${firstname}&lastname=${lastname}`
     );
     setEmployeeList(searchEmpleado.data);
+  }
+
+  const updateEmployeeList = (newEmployeeList) => {
+    setEmployeeList(newEmployeeList);
+    setEmployee({firstname: '', lastname: ''});
   }
 
   return (
@@ -71,7 +76,7 @@ export default function ConsultaEmpleados() {
         </div>
       </div>
 
-      <TablaEmpleados empleadosList={employeeList}/>
+      <TablaEmpleados employeeList={employeeList} setEmployeeList={updateEmployeeList}/>
 
     </div>
   )
