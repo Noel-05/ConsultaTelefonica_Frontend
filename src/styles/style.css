@@ -52,7 +52,9 @@
 }
 
 .inputLeftColor {
+    width: 195px;
     background-color: lightgray;
+    display: block;
 }
 
 .btnTableHeader {
@@ -70,4 +72,8 @@
 
 .imgCumple {
     width: 100px;
+}
+
+.selectLarge {
+    width: 55%;
 }
