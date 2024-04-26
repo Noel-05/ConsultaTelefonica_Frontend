@@ -28,14 +28,14 @@ export default function ConsultaUnidad() {
       // Se crea un nuevo arreglo con value y label ya que es el formato que solicita el Select de React.
       const newOptions = getDependencies.data.map(depend => ({
         value: depend.id,
-        label: depend.name
+        label: depend.code + " - " + depend.name
       }));
   
       setDependenciesList(newOptions);
     }
 
     searchDependencies();
-  }, [])
+  }, []);
 
   
   /*  Función para setear la Dependencia seleccionada, 
@@ -63,8 +63,8 @@ export default function ConsultaUnidad() {
     // Se crea un nuevo arreglo con value y label ya que es el formato que solicita el Select de React.
     const newOptions = getUnidades.data.map(unidad => ({
       value: unidad.id,
-      label: unidad.name
-    }))
+      label: unidad.code + " - " + unidad.name
+    }));
 
     setUnidadesList(newOptions);
   }
@@ -74,6 +74,7 @@ export default function ConsultaUnidad() {
     const searchEmpleado = await axios.get(
       `${process.env.REACT_APP_API_URL}/empleado/unidad/${unidadId}`
     );
+    
     setEmployeeList(searchEmpleado.data);
   }
 

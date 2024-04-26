@@ -28,6 +28,7 @@ export default function ConsultaEmpleados() {
     const searchEmpleado = await axios.get(
       `${process.env.REACT_APP_API_URL}/empleado?firstname=${firstname}&lastname=${lastname}`
     );
+    
     setEmployeeList(searchEmpleado.data);
   }
 
