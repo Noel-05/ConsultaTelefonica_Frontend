@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import ConsultaEmpleados from './consultaEmpleados/ConsultaEmpleados';
 import ConsultaUnidad from './consultaUnidad/ConsultaUnidad';
 import Cumpleaneros from './cumpleaneros/Cumpleaneros';
+import ViewEmpleado from './mantenimientos/empleados/ViewEmpleado';
 import Favicon from 'react-favicon';
 import { useEffect } from 'react';
 
@@ -35,6 +36,7 @@ function App() {
           <Route path='/consultaEmpleados' element={<ConsultaEmpleados />} />
           <Route path='/consultaUnidad' element={<ConsultaUnidad />} />
           <Route path='/cumpleaneros' element={<Cumpleaneros />} />
+          <Route path='/empleados' element={<ViewEmpleado />} />
         </Routes>
       </Router>
     </div>

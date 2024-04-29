@@ -32,6 +32,15 @@
 .navTextColor:hover{
     color: gray;
 }
+.navTextColor:focus{
+    color: var(--gobiernoColor);
+}
+
+.navActiveColorDropDown:focus {
+    color: white;
+    background-color: white;
+    color: var(--gobiernoColor);
+}
 
 .navTextSmall {
     font-size: 13px;

@@ -7,7 +7,10 @@ export default function TabItem({tabName, pathName}) {
     return (
         <li className="nav-item">
             <Link 
-                className={`nav-link navTextColor navTextSmall ${location === pathName ? 'navActiveColor active' : ''}`} 
+                className={`
+                    nav-link navTextColor navTextSmall 
+                    ${location === pathName ? 'navActiveColor active' : ''}
+                `} 
                 to={pathName}
             >
                 {tabName}
