@@ -15,8 +15,8 @@ export default function Tabs() {
                 dropDownName={'MANTENIMIENTOS'} 
                 dropDownOptions={[
                     {path: '/empleados', name: 'EMPLEADOS'},
-                    {path: '/', name: 'DEPENDENCIAS'},
-                    {path: '/', name: 'UNIDADES'}
+                    {path: '', name: 'DEPENDENCIAS'},
+                    {path: '', name: 'UNIDADES'}
                 ]}
             />
         </ul>
